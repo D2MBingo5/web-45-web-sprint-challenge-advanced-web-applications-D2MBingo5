@@ -31,10 +31,16 @@ const Login = (props) => {
   //replace with error state
 
   const handleChange = e => {
-    const { name, value } = e.target
-    const valToUse = value
-    change(name, valToUse)
-    // console.log(credentials.username)
+    // const { name, value } = e.target
+    // const valToUse = value
+    // setCredentials(name, valToUse)
+    setCredentials({
+      credentials: {
+        ...credentials,
+        [e.target.name]: e.target.value
+      }
+    })
+    console.log(credentials)
   }
 
   return (
@@ -56,6 +62,7 @@ const Login = (props) => {
             name='password'
             id='password'
             placeholder='password'
+            onChange={handleChange}
           />
           <button>Log In</button>
         </form>
