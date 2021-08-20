@@ -3,15 +3,39 @@ import React, { useState } from "react";
 const Login = (props) => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  props = {
-    credentials: {
-      username: '',
-      password: ''
-    }
-  }
+
+  // props = {
+  //   credentials: {
+  //     username: '',
+  //     password: ''
+  //   }
+  // }
+  // const credentials = {
+  //   username: '',
+  //   password: ''
+  // }
+  const [credentials, setCredentials] = useState({
+    username: '',
+    password: ''
+  })
+
+  console.log(credentials)
+
+  const {
+    submit,
+    change,
+    errors
+  } = props
 
   const [error, setError] = useState('')
   //replace with error state
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    const valToUse = value
+    change(name, valToUse)
+    // console.log(credentials.username)
+  }
 
   return (
     <div>
@@ -24,6 +48,8 @@ const Login = (props) => {
             name='username'
             id='username'
             placeholder='username'
+            // value={credentials.username}
+            onChange={handleChange}
           />
           <input 
             type='password'
