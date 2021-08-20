@@ -7,6 +7,18 @@ const Login = () => {
   // when you have handled the token, navigate to the BubblePage route
   const history = useHistory()
 
+  // brought out of onSubmit for cleaner code
+  const tokenCall = () => {
+    axios.post(`http://localhost:5000/api/login`, credentials)
+        .then(res => {
+          console.log(res)
+          localStorage.setItem('token', res.data.payload)
+          localStorage.setItem('username', credentials.username)
+          history.push('/bubbles')
+        })
+        .catch(err => {console.log(err)})
+  }
+
   // useState used because this is a functional component, not a class component
   const [credentials, setCredentials] = useState({
     username: '',
@@ -30,14 +42,7 @@ const Login = () => {
       setError('Username or Password not valid.')
     } else {
       setError('')
-      axios.post(`http://localhost:5000/api/login`, credentials)
-        .then(res => {
-          console.log(res)
-          localStorage.setItem('token', res.data.payload)
-          localStorage.setItem('username', credentials.username)
-          history.push('/bubbles')
-        })
-        .catch(err => {console.log(err)})
+      tokenCall()
     }
   }
 
