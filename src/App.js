@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Login from "./components/Login";
+import BubblePage from "./components/BubblePage";
 import "./styles.scss";
+
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -13,6 +16,7 @@ function App() {
           <a data-testid='loginButton' href='/login'>login</a>
           <a data-testid="logoutButton" href="#">logout</a>
         </header>
+        <PrivateRoute exact path='/bubbles' component={BubblePage} />
         <Route path='/login'><Login /></Route>
         <Route exact path='/'><Login /></Route>        
       </div>
