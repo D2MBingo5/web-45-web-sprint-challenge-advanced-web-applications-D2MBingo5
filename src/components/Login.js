@@ -28,6 +28,13 @@ const Login = () => {
       setError('Username or Password not valid.')
     } else {
       setError('')
+      axios.post(`http://localhost:5000/api/login`, credentials)
+        .then(res => {
+          console.log(res)
+          localStorage.setItem('token', res.data.payload)
+          localStorage.setItem('username', credentials.username)
+        })
+        .catch(err => {console.log(err)})
     }
   }
 
@@ -52,7 +59,7 @@ const Login = () => {
             placeholder='password'
             onChange={handleChange}
           />
-          <button>Log In</button>
+          <button id='submit'>Log In</button>
         </form>
       </div>
 
