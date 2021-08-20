@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Login = (props) => {
+const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
 
@@ -21,12 +21,6 @@ const Login = (props) => {
 
   console.log(credentials)
 
-  const {
-    submit,
-    change,
-    errors
-  } = props
-
   const [error, setError] = useState('')
   //replace with error state
 
@@ -35,10 +29,10 @@ const Login = (props) => {
     // const valToUse = value
     // setCredentials(name, valToUse)
     setCredentials({
-      credentials: {
+
         ...credentials,
         [e.target.name]: e.target.value
-      }
+
     })
     console.log(credentials)
   }
