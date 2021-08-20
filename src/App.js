@@ -10,9 +10,12 @@ function App() {
       <div className="App">
         <header>
           Color Picker Sprint Challenge
+          <a data-testid='loginButton' href='/'>login</a>
           <a data-testid="logoutButton" href="#">logout</a>
         </header>
+        <Login />
       </div>
+
     </Router>
   );
 }
