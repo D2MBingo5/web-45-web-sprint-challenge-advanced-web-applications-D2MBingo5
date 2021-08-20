@@ -13,6 +13,7 @@ const Login = () => {
         .then(res => {
           console.log(res)
           localStorage.setItem('token', res.data.payload)
+          // I know I probably don't need a username field saved to my localStorage. I just like the clarity.
           localStorage.setItem('username', credentials.username)
           history.push('/bubbles')
         })

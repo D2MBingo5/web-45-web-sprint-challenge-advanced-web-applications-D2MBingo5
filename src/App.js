@@ -13,7 +13,6 @@ function App() {
     axiosWithAuth()
       .post('/logout')
       .then(res => {
-        console.log('tried escaping', res)
         localStorage.removeItem('token')
         localStorage.removeItem('username')
         window.location.href = '/login'
