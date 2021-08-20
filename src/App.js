@@ -6,15 +6,29 @@ import BubblePage from "./components/BubblePage";
 import "./styles.scss";
 
 import PrivateRoute from "./components/PrivateRoute";
+import axiosWithAuth from "./helpers/axiosWithAuth";
 
 function App() {
+  const Logout = () => {
+    axiosWithAuth()
+      .post('/logout')
+      .then(res => {
+        console.log('tried escaping', res)
+        localStorage.removeItem('token')
+        localStorage.removeItem('username')
+        window.location.href = '/login'
+      })
+      .catch(err => {console.log(err)})
+  }
+
   return (
+
     <Router>
       <div className="App">
         <header>
           Color Picker Sprint Challenge
           <a data-testid='loginButton' href='/login'>login</a>
-          <a data-testid="logoutButton" href="#">logout</a>
+          <a data-testid="logoutButton" href="#" onClick={Logout}>logout</a>
         </header>
         <PrivateRoute exact path='/bubbles' component={BubblePage} />
         <Route path='/login'><Login /></Route>
