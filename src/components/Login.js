@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
 const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
+  const history = useHistory()
 
   // useState used because this is a functional component, not a class component
   const [credentials, setCredentials] = useState({
@@ -33,6 +35,7 @@ const Login = () => {
           console.log(res)
           localStorage.setItem('token', res.data.payload)
           localStorage.setItem('username', credentials.username)
+          history.push('/bubbles')
         })
         .catch(err => {console.log(err)})
     }
