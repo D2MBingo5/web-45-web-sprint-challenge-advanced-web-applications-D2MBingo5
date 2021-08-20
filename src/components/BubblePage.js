@@ -5,6 +5,7 @@ import ColorList from "./ColorList";
 import fetchColorService from '../services/fetchColorService';
 
 import axiosWithAuth from "../helpers/axiosWithAuth";
+import axios from "axios";
 
 const BubblePage = () => {
   const [colors, setColors] = useState([]);
@@ -23,21 +24,30 @@ const BubblePage = () => {
   };
 
   const saveEdit = (editColor) => {
-    console.log('edit', editColor.id, editColor.color, editColor.code.hex)
+    // console.log('edit', editColor.id, editColor.color, editColor.code.hex)
     axiosWithAuth()
       .put(`colors/${editColor.id}`, editColor)
       .then(res => {
-        console.log('put', res)
+        // Troubleshooting
+        // console.log('put', res)
+        // editColor.id = res.data.id
+        // editColor.name = res.data.name
+        // editColor.code.hex = res.data.code.hex
         setColors([
-          ...colors,
-          res.data
+          ...colors
         ])
       })
       .catch(err => {console.log(err)})
   };
 
   const deleteColor = (colorToDelete) => {
-    console.log('delete', colorToDelete)
+    console.log('delete', colorToDelete.id)
+    axiosWithAuth().delete(`colors/${colorToDelete.id}`)
+      .then(res => {
+        console.log(colors)
+        // I'm very afraid to change the state of setColors
+      })
+      .catch(err => {console.log(err)})
   };
 
   return (
