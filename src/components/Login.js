@@ -1,40 +1,34 @@
 import React, { useState } from "react";
+import axios from 'axios'
 
 const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
 
-  // props = {
-  //   credentials: {
-  //     username: '',
-  //     password: ''
-  //   }
-  // }
-  // const credentials = {
-  //   username: '',
-  //   password: ''
-  // }
+  // useState used because this is a functional component, not a class component
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
   })
 
-  console.log(credentials)
-
   const [error, setError] = useState('')
   //replace with error state
 
   const handleChange = e => {
-    // const { name, value } = e.target
-    // const valToUse = value
-    // setCredentials(name, valToUse)
     setCredentials({
-
         ...credentials,
-        [e.target.name]: e.target.value
-
+        [e.target.name]: e.target.value // like magic
     })
+  }
+
+  const onSubmit = e => {
+    e.preventDefault()
     console.log(credentials)
+    if (credentials.username !== 'Lambda' || credentials.password !== 'School') {
+      setError('Username or Password not valid.')
+    } else {
+      setError('')
+    }
   }
 
   return (
@@ -42,13 +36,13 @@ const Login = () => {
       <h1>Welcome to the Bubble App!</h1>
       <div data-testid="loginForm" className="login-form">
         <h2>Build login form here</h2>
-        <form>
+        <form onSubmit={onSubmit}>
           <input 
             type='text'
             name='username'
             id='username'
             placeholder='username'
-            // value={credentials.username}
+            // value={credentials.username} // I don't yet know if this is needed
             onChange={handleChange}
           />
           <input 
